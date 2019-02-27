@@ -16,7 +16,6 @@
 *.out
 
 ### Go Patch ###
-/vendor/
 /Godeps/
 
 ### Intellij ###
@@ -75,7 +74,7 @@ fabric.properties
 Icon
 
 # Thumbnails
-._*
+._*C
 
 # Files that might appear in the root of a volume
 .DocumentRevisions-V100
