@@ -1,7 +1,6 @@
 package main
 
-import "fmt"
-
 func main() {
-	fmt.Println("Hello, Plugin!")
+	devicePlugin := NewAndroidDevicesPlugin()
+	devicePlugin.Start()
 }
