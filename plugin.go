@@ -12,7 +12,7 @@ import (
 )
 
 const (
-	resourceName     = "android-device"
+	resourceName     = "android/device"
 	serverSocketName = pluginapi.DevicePluginPath + "android.sock"
 )
 
@@ -112,7 +112,12 @@ func (p *AndroidDevicesPlugin) startPluginGrpcServer() error {
 	pluginapi.RegisterDevicePluginServer(p.server, p)
 
 	//noinspection GoUnhandledErrorResult
-	go p.server.Serve(socket)
+	go func() {
+		err = p.server.Serve(socket)
+		if err != nil {
+			log.Fatal(err)
+		}
+	}()
 
 	err = p.waitForPluginServer()
 	if err != nil {
@@ -126,7 +131,7 @@ func (p *AndroidDevicesPlugin) registerPlugin() error {
 	connectionEstablishContext, connectionEstablishContextCancel := grpcContext()
 	defer connectionEstablishContextCancel()
 
-	connection, err := dial(p.socketPath, connectionEstablishContext)
+	connection, err := dial(p.kubeletSocket, connectionEstablishContext)
 	if err != nil {
 		return err
 	}
