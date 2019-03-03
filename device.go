@@ -8,12 +8,12 @@ type Device struct {
 
 type DevicesListener interface {
 	Listen()
-	Devices() chan *Device
+	Devices() chan []*Device
 	Errors() chan error
 }
 
 type UsbAndroidDevicesListener struct {
-	devices chan *Device
+	devices chan []*Device
 	errors  chan error
 }
 
@@ -22,26 +22,23 @@ func NewUsbAndroidDevicesListener() DevicesListener {
 }
 
 func (l *UsbAndroidDevicesListener) Listen() {
-	l.devices = make(chan *Device)
+	l.devices = make(chan []*Device)
 	l.errors = make(chan error)
 
-	go func() {
-		for {
-			devices, err := l.getDevices()
-			if err != nil {
-				l.abort(err)
-			}
-
-			for _, device := range devices {
-				l.devices <- device
-			}
-
-			time.Sleep(time.Second)
+	for {
+		devices, err := l.getDevices()
+		if err != nil {
+			l.abort(err)
+			break
 		}
-	}()
+
+		l.devices <- devices
+
+		time.Sleep(time.Second)
+	}
 }
 
-func (l *UsbAndroidDevicesListener) Devices() chan *Device {
+func (l *UsbAndroidDevicesListener) Devices() chan []*Device {
 	return l.devices
 }
 

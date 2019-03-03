@@ -48,21 +48,38 @@ func (p *AndroidDevicesPlugin) ListAndWatch(
 	in *pluginapi.Empty,
 	server pluginapi.DevicePlugin_ListAndWatchServer,
 ) error {
-	panic("implement me")
+	for {
+		select {
+		case devices := <-p.devicesListener.Devices():
+			err := server.Send(
+				&pluginapi.ListAndWatchResponse{
+					Devices: p.toKubernetesDevices(devices),
+				},
+			)
+			if err != nil {
+				log.Println("Something went wrong during send devices in listener", err)
+			}
+
+		case err := <-p.devicesListener.Errors():
+			log.Println("Device getting error. Stopping...", err)
+			_ = p.stop()
+			log.Println("Device plugin server stopped")
+		}
+	}
 }
 
 func (p *AndroidDevicesPlugin) Allocate(
 	ctx context.Context,
 	in *pluginapi.AllocateRequest,
 ) (*pluginapi.AllocateResponse, error) {
-	panic("implement me")
+	return &pluginapi.AllocateResponse{}, nil
 }
 
 func (p *AndroidDevicesPlugin) PreStartContainer(
 	ctx context.Context,
 	in *pluginapi.PreStartContainerRequest,
 ) (*pluginapi.PreStartContainerResponse, error) {
-	panic("implement me")
+	return &pluginapi.PreStartContainerResponse{}, nil
 }
 
 func (p *AndroidDevicesPlugin) Start() {
@@ -81,7 +98,7 @@ func (p *AndroidDevicesPlugin) Start() {
 	log.Println("Register plugin...")
 	err = p.registerPlugin()
 	if err != nil {
-		_ = p.Stop()
+		_ = p.stop()
 		log.Fatal("Something went wrong during register plugin: ", err)
 	}
 	log.Println("Plugin registered")
@@ -90,7 +107,7 @@ func (p *AndroidDevicesPlugin) Start() {
 	p.devicesListener.Listen()
 }
 
-func (p *AndroidDevicesPlugin) Stop() error {
+func (p *AndroidDevicesPlugin) stop() error {
 	if p.server == nil {
 		return nil
 	}
@@ -185,4 +202,17 @@ func (p *AndroidDevicesPlugin) cleanupPluginServerSocket() error {
 	}
 
 	return nil
+}
+
+func (p *AndroidDevicesPlugin) toKubernetesDevices(devices []*Device) []*pluginapi.Device {
+	var kubernetesDevices []*pluginapi.Device
+
+	for _, device := range devices {
+		kubernetesDevices = append(kubernetesDevices, &pluginapi.Device{
+			ID:     device.devicePath,
+			Health: pluginapi.Healthy,
+		})
+	}
+
+	return kubernetesDevices
 }
