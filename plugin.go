@@ -17,7 +17,7 @@ const (
 )
 
 type AndroidDevicesPlugin struct {
-	devices []*pluginapi.Device
+	devicesListener DevicesListener
 
 	server *grpc.Server
 
@@ -26,13 +26,14 @@ type AndroidDevicesPlugin struct {
 	resourceName  string
 }
 
-func NewAndroidDevicesPlugin() *AndroidDevicesPlugin {
+func NewAndroidDevicesPlugin(devicesListener DevicesListener) *AndroidDevicesPlugin {
 	return &AndroidDevicesPlugin{
-		devices: []*pluginapi.Device{},
+		devicesListener: devicesListener,
 
 		socketPath:    serverSocketName,
 		kubeletSocket: pluginapi.KubeletSocket,
-		resourceName:  resourceName,
+
+		resourceName: resourceName,
 	}
 }
 
@@ -84,6 +85,9 @@ func (p *AndroidDevicesPlugin) Start() {
 		log.Fatal("Something went wrong during register plugin: ", err)
 	}
 	log.Println("Plugin registered")
+
+	log.Println("Starting devices listener")
+	p.devicesListener.Listen()
 }
 
 func (p *AndroidDevicesPlugin) Stop() error {

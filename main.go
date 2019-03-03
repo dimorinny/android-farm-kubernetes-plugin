@@ -1,6 +1,8 @@
 package main
 
 func main() {
-	devicePlugin := NewAndroidDevicesPlugin()
+	devicesListener := NewUsbAndroidDevicesListener()
+	devicePlugin := NewAndroidDevicesPlugin(devicesListener)
+
 	devicePlugin.Start()
 }
