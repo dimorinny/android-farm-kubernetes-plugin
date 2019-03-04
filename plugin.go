@@ -72,13 +72,25 @@ func (p *AndroidDevicesPlugin) Allocate(
 	ctx context.Context,
 	in *pluginapi.AllocateRequest,
 ) (*pluginapi.AllocateResponse, error) {
-	return &pluginapi.AllocateResponse{}, nil
+	log.Println("Allocate callback called for", in)
+
+	response := pluginapi.AllocateResponse{}
+
+	for range in.ContainerRequests {
+		containerResponse := pluginapi.ContainerAllocateResponse{}
+
+		response.ContainerResponses = append(response.ContainerResponses, &containerResponse)
+	}
+
+	return &response, nil
 }
 
 func (p *AndroidDevicesPlugin) PreStartContainer(
 	ctx context.Context,
 	in *pluginapi.PreStartContainerRequest,
 ) (*pluginapi.PreStartContainerResponse, error) {
+	log.Println("PreStartContainer callback called for", in)
+
 	return &pluginapi.PreStartContainerResponse{}, nil
 }
 
