@@ -1,3 +1,5 @@
+# github.com/dimorinny/android-devices v0.0.0-20190309012537-d86af3c2cd96
+github.com/dimorinny/android-devices
 # github.com/gogo/protobuf v1.2.1
 github.com/gogo/protobuf/gogoproto
 github.com/gogo/protobuf/proto
@@ -9,7 +11,10 @@ github.com/golang/protobuf/ptypes
 github.com/golang/protobuf/ptypes/any
 github.com/golang/protobuf/ptypes/duration
 github.com/golang/protobuf/ptypes/timestamp
-# golang.org/x/net v0.0.0-20190226215741-afe646ca25a4
+# github.com/google/gousb v0.0.0-20190125150036-d0c05ab7f70d
+github.com/google/gousb
+github.com/google/gousb/usbid
+# golang.org/x/net v0.0.0-20190310074541-c10a0554eabf
 golang.org/x/net/context
 golang.org/x/net/trace
 golang.org/x/net/internal/timeseries

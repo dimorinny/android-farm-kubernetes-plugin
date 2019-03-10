@@ -1,8 +1,15 @@
 package main
 
-import "time"
+import (
+	"fmt"
+	"github.com/dimorinny/android-devices"
+	"log"
+	"os"
+	"time"
+)
 
 type Device struct {
+	deviceName string
 	devicePath string
 }
 
@@ -47,14 +54,37 @@ func (l *UsbAndroidDevicesListener) Errors() chan error {
 }
 
 func (l *UsbAndroidDevicesListener) getDevices() ([]*Device, error) {
-	return []*Device{
-		{
-			devicePath: "device1",
-		},
-		{
-			devicePath: "device2",
-		},
-	}, nil
+	devices, err := android.Devices()
+	if err != nil {
+		return nil, err
+	}
+
+	var resultDevices []*Device
+	for _, device := range devices {
+		linuxDevicePath := fmt.Sprintf("/dev/bus/usb/%03d/%03d", device.Bus, device.Address)
+
+		if _, err := os.Stat(linuxDevicePath); os.IsNotExist(err) {
+			log.Println(
+				fmt.Sprintf(
+					"Linux device file: %s not found (for device: %s)",
+					linuxDevicePath,
+					device.Description,
+				),
+			)
+
+			continue
+		}
+
+		resultDevices = append(
+			resultDevices,
+			&Device{
+				deviceName: device.Description,
+				devicePath: linuxDevicePath,
+			},
+		)
+	}
+
+	return resultDevices, nil
 }
 
 func (l *UsbAndroidDevicesListener) abort(err error) {
