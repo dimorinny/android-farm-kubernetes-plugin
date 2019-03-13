@@ -76,8 +76,19 @@ func (p *AndroidDevicesPlugin) Allocate(
 
 	response := pluginapi.AllocateResponse{}
 
-	for range in.ContainerRequests {
+	for _, request := range in.ContainerRequests {
 		containerResponse := pluginapi.ContainerAllocateResponse{}
+
+		for _, deviceId := range request.DevicesIDs {
+			log.Println("Allocating device with id:", deviceId)
+
+			device := &pluginapi.DeviceSpec{}
+			device.HostPath = deviceId
+			device.ContainerPath = deviceId
+			device.Permissions = "rw"
+
+			containerResponse.Devices = append(containerResponse.Devices, device)
+		}
 
 		response.ContainerResponses = append(response.ContainerResponses, &containerResponse)
 	}

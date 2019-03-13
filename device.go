@@ -39,9 +39,13 @@ func (l *UsbAndroidDevicesListener) Listen() {
 			break
 		}
 
+		log.Println(
+			fmt.Sprintf("Found %d devices", len(devices)),
+		)
+
 		l.devices <- devices
 
-		time.Sleep(time.Second)
+		time.Sleep(time.Second * 5)
 	}
 }
 
