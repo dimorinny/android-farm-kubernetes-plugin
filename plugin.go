@@ -64,6 +64,8 @@ func (p *AndroidDevicesPlugin) ListAndWatch(
 			log.Println("Device getting error. Stopping...", err)
 			_ = p.stop()
 			log.Println("Device plugin server stopped")
+
+			break
 		}
 	}
 }
