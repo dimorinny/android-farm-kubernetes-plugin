@@ -18,14 +18,15 @@ spec:
         - image: dimorinny/android-devices-kubernetes-plugin
           name: android-device-plugin-ctr
           imagePullPolicy: Never # TODO: delete
-          securityContext:
-            allowPrivilegeEscalation: false
-            capabilities:
-              drop: ["ALL"]
           volumeMounts:
             - name: device-plugin
               mountPath: /var/lib/kubelet/device-plugins
+            - name: usb-devices
+              mountPath: /dev/bus/usb/
       volumes:
         - name: device-plugin
           hostPath:
             path: /var/lib/kubelet/device-plugins
+        - name: usb-devices
+          hostPath:
+            path: /dev/bus/usb/

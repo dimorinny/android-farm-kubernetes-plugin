@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: pod-with-android-device
+  name: pod-with-android-device1
 spec:
   restartPolicy: OnFailure
   containers:
-    - image: alpine
-      name: container-with-android-device
-      command: ["sleep"]
-      args: ["100000"]
+    - image: sorccu/adb
+      name: container-with-android-device1
+      command: ["adb"]
+      args: ["devices"]
       resources:
         limits:
           android/device: 1
