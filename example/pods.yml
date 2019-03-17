@@ -1,0 +1,317 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-android-device-1
+spec:
+  restartPolicy: OnFailure
+  containers:
+  - image: dimorinny/android-task
+    name: container-with-android-device
+    env:
+    - name: JOB_NAME
+      valueFrom:
+        fieldRef:
+          fieldPath: metadata.name
+    resources:
+      limits:
+        android/device: 1
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-android-device-2
+spec:
+  restartPolicy: OnFailure
+  containers:
+    - image: dimorinny/android-task
+      name: container-with-android-device
+      env:
+        - name: JOB_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+      resources:
+        limits:
+          android/device: 1
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-android-device-3
+spec:
+  restartPolicy: OnFailure
+  containers:
+    - image: dimorinny/android-task
+      name: container-with-android-device
+      env:
+        - name: JOB_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+      resources:
+        limits:
+          android/device: 1
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-android-device-4
+spec:
+  restartPolicy: OnFailure
+  containers:
+    - image: dimorinny/android-task
+      name: container-with-android-device
+      env:
+        - name: JOB_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+      resources:
+        limits:
+          android/device: 1
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-android-device-5
+spec:
+  restartPolicy: OnFailure
+  containers:
+    - image: dimorinny/android-task
+      name: container-with-android-device
+      env:
+        - name: JOB_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+      resources:
+        limits:
+          android/device: 1
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-android-device-6
+spec:
+  restartPolicy: OnFailure
+  containers:
+    - image: dimorinny/android-task
+      name: container-with-android-device
+      env:
+        - name: JOB_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+      resources:
+        limits:
+          android/device: 1
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-android-device-7
+spec:
+  restartPolicy: OnFailure
+  containers:
+    - image: dimorinny/android-task
+      name: container-with-android-device
+      env:
+        - name: JOB_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+      resources:
+        limits:
+          android/device: 1
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-android-device-8
+spec:
+  restartPolicy: OnFailure
+  containers:
+    - image: dimorinny/android-task
+      name: container-with-android-device
+      env:
+        - name: JOB_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+      resources:
+        limits:
+          android/device: 1
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-android-device-9
+spec:
+  restartPolicy: OnFailure
+  containers:
+    - image: dimorinny/android-task
+      name: container-with-android-device
+      env:
+        - name: JOB_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+      resources:
+        limits:
+          android/device: 1
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-android-device-10
+spec:
+  restartPolicy: OnFailure
+  containers:
+    - image: dimorinny/android-task
+      name: container-with-android-device
+      env:
+        - name: JOB_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+      resources:
+        limits:
+          android/device: 1
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-android-device-11
+spec:
+  restartPolicy: OnFailure
+  containers:
+    - image: dimorinny/android-task
+      name: container-with-android-device
+      env:
+        - name: JOB_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+      resources:
+        limits:
+          android/device: 1
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-android-device-12
+spec:
+  restartPolicy: OnFailure
+  containers:
+    - image: dimorinny/android-task
+      name: container-with-android-device
+      env:
+        - name: JOB_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+      resources:
+        limits:
+          android/device: 1
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-android-device-13
+spec:
+  restartPolicy: OnFailure
+  containers:
+    - image: dimorinny/android-task
+      name: container-with-android-device
+      env:
+        - name: JOB_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+      resources:
+        limits:
+          android/device: 1
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-android-device-14
+spec:
+  restartPolicy: OnFailure
+  containers:
+    - image: dimorinny/android-task
+      name: container-with-android-device
+      env:
+        - name: JOB_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+      resources:
+        limits:
+          android/device: 1
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-android-device-15
+spec:
+  restartPolicy: OnFailure
+  containers:
+    - image: dimorinny/android-task
+      name: container-with-android-device
+      env:
+        - name: JOB_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+      resources:
+        limits:
+          android/device: 1
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-android-device-16
+spec:
+  restartPolicy: OnFailure
+  containers:
+    - image: dimorinny/android-task
+      name: container-with-android-device
+      env:
+        - name: JOB_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+      resources:
+        limits:
+          android/device: 1
