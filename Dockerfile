@@ -12,6 +12,6 @@ FROM alpine
 
 RUN apk add --no-cache libusb-dev
 
-COPY --from=builder /plugin/android-devices-kubernetes-plugin /usr/bin/android-devices-kubernetes-plugin
+COPY --from=builder /plugin/android-farm-kubernetes-plugin /usr/bin/android-farm-kubernetes-plugin
 
-CMD ["/usr/bin/android-devices-kubernetes-plugin"]
+CMD ["/usr/bin/android-farm-kubernetes-plugin"]

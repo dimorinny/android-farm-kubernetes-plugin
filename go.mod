@@ -1,4 +1,4 @@
-module android-devices-kubernetes-plugin
+module android-farm-kubernetes-plugin
 
 require (
 	github.com/dimorinny/android-devices v0.0.0-20190309012537-d86af3c2cd96

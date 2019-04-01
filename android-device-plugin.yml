@@ -15,7 +15,7 @@ spec:
         - key: CriticalAddonsOnly
           operator: Exists
       containers:
-        - image: dimorinny/android-devices-kubernetes-plugin
+        - image: dimorinny/android-farm-kubernetes-plugin
           name: android-device-plugin-ctr
           imagePullPolicy: Never # TODO: delete
           volumeMounts:
