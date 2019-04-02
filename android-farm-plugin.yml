@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: DaemonSet
 metadata:
-  name: android-device-plugin-daemonset
+  name: android-farm-plugin-daemonset
   namespace: kube-system
 spec:
   template:
@@ -9,15 +9,14 @@ spec:
       annotations:
         scheduler.alpha.kubernetes.io/critical-pod: ""
       labels:
-        name: android-device-plugin-ds
+        name: android-farm-plugin-daemonset
     spec:
       tolerations:
         - key: CriticalAddonsOnly
           operator: Exists
       containers:
-        - image: dimorinny/android-farm-kubernetes-plugin
-          name: android-device-plugin-ctr
-          imagePullPolicy: Never # TODO: delete
+        - image: dimorinny/android-farm-kubernetes-plugin:1.10.11
+          name: android-farm-plugin-container
           volumeMounts:
             - name: device-plugin
               mountPath: /var/lib/kubelet/device-plugins
