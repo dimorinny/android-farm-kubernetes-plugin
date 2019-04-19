@@ -4,7 +4,7 @@ import (
 	"errors"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
-	pluginapi "k8s.io/kubernetes/pkg/kubelet/apis/deviceplugin/v1beta1"
+	pluginapi "k8s.io/kubernetes/pkg/kubelet/apis/deviceplugin/v1alpha1"
 	"log"
 	"net"
 	"os"
@@ -35,13 +35,6 @@ func NewAndroidDevicesPlugin(devicesListener DevicesListener) *AndroidDevicesPlu
 
 		resourceName: resourceName,
 	}
-}
-
-func (p *AndroidDevicesPlugin) GetDevicePluginOptions(
-	ctx context.Context,
-	in *pluginapi.Empty,
-) (*pluginapi.DevicePluginOptions, error) {
-	return &pluginapi.DevicePluginOptions{}, nil
 }
 
 func (p *AndroidDevicesPlugin) ListAndWatch(
@@ -78,33 +71,22 @@ func (p *AndroidDevicesPlugin) Allocate(
 
 	response := pluginapi.AllocateResponse{}
 
-	for _, request := range in.ContainerRequests {
-		containerResponse := pluginapi.ContainerAllocateResponse{}
+	devRuntime := pluginapi.DeviceRuntimeSpec{}
 
-		for _, deviceId := range request.DevicesIDs {
-			log.Println("Allocating device with id:", deviceId)
+	for _, deviceId := range in.DevicesIDs {
+		log.Println("Allocating device with id:", deviceId)
 
-			device := &pluginapi.DeviceSpec{}
-			device.HostPath = deviceId
-			device.ContainerPath = deviceId
-			device.Permissions = "rw"
+		device := &pluginapi.DeviceSpec{}
+		device.HostPath = deviceId
+		device.ContainerPath = deviceId
+		device.Permissions = "rw"
 
-			containerResponse.Devices = append(containerResponse.Devices, device)
-		}
-
-		response.ContainerResponses = append(response.ContainerResponses, &containerResponse)
+		devRuntime.Devices = append(devRuntime.Devices, device)
 	}
 
+	response.Spec = append(response.Spec, &devRuntime)
+
 	return &response, nil
-}
-
-func (p *AndroidDevicesPlugin) PreStartContainer(
-	ctx context.Context,
-	in *pluginapi.PreStartContainerRequest,
-) (*pluginapi.PreStartContainerResponse, error) {
-	log.Println("PreStartContainer callback called for", in)
-
-	return &pluginapi.PreStartContainerResponse{}, nil
 }
 
 func (p *AndroidDevicesPlugin) Start() {

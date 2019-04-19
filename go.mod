@@ -5,5 +5,5 @@ require (
 	github.com/gogo/protobuf v1.2.1 // indirect
 	golang.org/x/net v0.0.0-20190310074541-c10a0554eabf
 	google.golang.org/grpc v1.19.0
-	k8s.io/kubernetes v1.14.1
+	k8s.io/kubernetes v1.8.0
 )
