@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-android-device-1
+spec:
+  restartPolicy: OnFailure
+  containers:
+    - image: dimorinny/device-proxy:latest
+      name: container-with-android-device
+      resources:
+        limits:
+          android/device: 1
