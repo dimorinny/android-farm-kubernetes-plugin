@@ -15,7 +15,7 @@ spec:
         - key: CriticalAddonsOnly
           operator: Exists
       containers:
-        - image: dimorinny/android-farm-kubernetes-plugin:1.17.3
+        - image: dimorinny/android-farm-kubernetes-plugin:1.14.1
           name: android-farm-plugin-container
           volumeMounts:
             - name: device-plugin
