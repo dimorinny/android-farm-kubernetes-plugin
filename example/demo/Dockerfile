@@ -1,4 +1,4 @@
-FROM sorccu/adb
+FROM sorccu/adb:latest
 
 RUN apk add --no-cache bash
 

@@ -1,4 +1,4 @@
-FROM golang:1.11-alpine as builder
+FROM golang:1.14-alpine as builder
 
 RUN apk add --no-cache gcc musl-dev alpine-sdk libusb-dev
 
